@@ -1,0 +1,68 @@
+class Particle{
+  PVector location;
+  PVector velocity;
+  PVector acceleration;
+  float lifeSpan;
+  float angle;
+     
+    Particle(PVector l){
+      
+      location =l.get();
+      velocity=new PVector(random(-1,1),random(-2,0));
+      acceleration=new PVector();
+      
+      lifeSpan=255;
+      
+      
+    
+    }
+
+  void update(){
+    
+    velocity.add(acceleration);
+    
+    acceleration.mult(0);
+    
+    location.add(velocity);
+    
+    lifeSpan-=1;
+    
+    angle+=0.1;
+  }
+
+  void display(){
+    stroke(-1, lifeSpan);
+    fill(#f0768b, lifeSpan);
+    
+    pushMatrix();
+    
+    translate(location.x,location.y);
+    rotate(angle);
+    rectMode(CENTER);
+    rect(0,0,5,5);
+    
+    popMatrix();
+  }
+  
+  void applyForce(PVector force){
+    acceleration.add(force);
+  
+  }
+  
+  
+  
+  void run(){
+    update();
+    display();
+    
+  }
+
+  boolean isDead(){
+    if(lifeSpan<0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+    
+  }
