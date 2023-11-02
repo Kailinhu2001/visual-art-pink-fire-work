@@ -1,0 +1,34 @@
+import java.util.Iterator;
+Environment envir;
+ParticleSystem ps;
+
+//ArrayList<ParticleSystem> particles;
+
+void setup(){
+  
+  size(600, 480);
+  ps = new ParticleSystem(new PVector());
+  envir = new Environment();
+
+}
+
+
+void draw(){
+  
+   background(#000000);
+   push();
+   envir.update();
+   ps.origin = new PVector(mouseX,mouseY);
+   ps.addParticle();
+   ps.run(envir);
+   pop();
+   
+   push();
+   fill(0,-100);
+   rect(0,0,width,height);
+   fill(255);
+   noStroke();
+   ellipse(random(width), random(height),5,5);
+   pop();
+ 
+}
